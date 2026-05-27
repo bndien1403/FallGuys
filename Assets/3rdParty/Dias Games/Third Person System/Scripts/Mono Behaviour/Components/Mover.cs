@@ -204,7 +204,7 @@ namespace DiasGames.Components
 			{
 				_speed = targetSpeed * inputMagnitude;
 			}
-			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
+		//	_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
 
 			// normalise input direction
 			Vector3 inputDirection = new Vector3(moveInput.x, 0.0f, moveInput.y).normalized;
