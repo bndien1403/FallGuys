@@ -2301,7 +2301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2048850887f074d4aaf3cb48991f4467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 721388579}
+  icon: {fileID: 1344593442}
   slotIndex: 0
 --- !u!114 &1344593441
 MonoBehaviour:

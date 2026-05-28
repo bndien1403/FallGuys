@@ -41,7 +41,7 @@ public class ItemManager : MonoBehaviour
         inventory.Add(itemDataSo);
         onItemAdded?.Invoke(itemDataSo);
         itemBarUI.Refresh(inventory, currentIndex);
-        if (currentIndex == -1) SelectSlot(0);
+       // if (currentIndex == -1) SelectSlot(0);
     }
 
     public void SwapItem(int slotIndex, ItemDataSO newItem)
@@ -49,7 +49,11 @@ public class ItemManager : MonoBehaviour
         if (slotIndex >= 0 || slotIndex < inventory.Count)
         {
             inventory[slotIndex] = newItem;
-            if(currentIndex== slotIndex) itemSpawner.Equid(newItem);
+            if(currentIndex == slotIndex) 
+            {
+                itemSpawner.UnEquid();
+                currentIndex = -1; 
+            }
             itemBarUI.Refresh(inventory, currentIndex);
             itemBarUI.HideSwapUI();
         }
