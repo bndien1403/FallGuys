@@ -17,9 +17,9 @@ MonoBehaviour:
   itemCategory: 0
   icon: {fileID: -8139733110256863280, guid: 3d98b1a625122b44185f7f70fdd7f506, type: 3}
   prefab: {fileID: 8344100662885815125, guid: c0c1db0afdb06e14390f4d9ff4496ca7, type: 3}
-  parentBoneName: 
+  parentBoneName: DEF-hand.R
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
-  worldScale: {x: 0.5, y: 0.5, z: 0.5}
+  worldScale: {x: 1, y: 1, z: 1}
   maxDurability: 10
   baseSpawnWeight: 1
