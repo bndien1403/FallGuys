@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6792973057979133396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7103557542357737404}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7103557542357737404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792973057979133396}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.21735, y: -1.42, z: 16.6}
+  m_LocalScale: {x: 16.666668, y: 16.666668, z: 16.666668}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1289957317196487066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1615772078556118641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74,6 +105,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cec105908f7354c49a9c5e00934827ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7103557542357737404}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8301296533060730363, guid: cec105908f7354c49a9c5e00934827ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2816304406038107272}
   m_SourcePrefab: {fileID: 100100000, guid: cec105908f7354c49a9c5e00934827ac, type: 3}
+--- !u!4 &1289957317196487066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cec105908f7354c49a9c5e00934827ac, type: 3}
+  m_PrefabInstance: {fileID: 1615772078556118641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1920713687051484276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8301296533060730363, guid: cec105908f7354c49a9c5e00934827ac, type: 3}
+  m_PrefabInstance: {fileID: 1615772078556118641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2816304406038107272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920713687051484276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed790454e54c3b429be853301b02857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 96959f44d757882469dd785cdbf6ddbd, type: 2}
+  gunMuzzle: {fileID: 7103557542357737404}
+  muzzleFlash: {fileID: 0}
+  knockbackForce: 5
+  stunDuration: 2
+  shootAnimTrigger: Shoot

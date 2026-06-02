@@ -62,14 +62,21 @@ public class ItemManager : MonoBehaviour
 
     public void SelectSlot(int index)
     {
-        if (index >= 0 || index < inventory.Count)
+        if (index >= 0 && index < inventory.Count) 
         {
+            
+            if (currentIndex == index)
+            {
+                currentIndex = -1;
+                itemSpawner.UnEquid(); 
+                onSlotSelected?.Invoke(-1); 
+                itemBarUI.Refresh(inventory, currentIndex); 
+                return;
+            }
             currentIndex = index;
             itemSpawner.Equid(inventory[currentIndex]);
             onSlotSelected?.Invoke(index);
             itemBarUI.Refresh(inventory, currentIndex);
-        
-            
         }
     }
 
