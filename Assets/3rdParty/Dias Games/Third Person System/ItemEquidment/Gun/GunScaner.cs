@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Tên class đã được đổi thành GunScaner theo đúng ý bác
 public class GunScaner : MonoBehaviour
 {
     [Header("UI References")]
@@ -8,19 +7,19 @@ public class GunScaner : MonoBehaviour
     public RectTransform redCrosshairUI; 
 
     [Header("Scanner Settings")]
-    public float scanRadius = 200f; 
+    public float scanRadius = 100f; // Cứ để 100, code sẽ tự quy đổi chuẩn
     public LayerMask enemyLayer;
     public float maxShootDistance = 50f;
 
     private Camera mainCam;
-    private Transform currentTarget;
+    
+    // ĐỔI TỪ Transform SANG Collider để lấy được tâm ngực
+    private Collider currentTargetCollider; 
 
     void Start()
     {
         mainCam = Camera.main;
-        
-        if (redCrosshairUI != null) 
-            redCrosshairUI.gameObject.SetActive(false);
+        if (redCrosshairUI != null) redCrosshairUI.gameObject.SetActive(false);
     }
 
     void Update()
@@ -31,40 +30,48 @@ public class GunScaner : MonoBehaviour
         }
         else
         {
-            currentTarget = null;
+            currentTargetCollider = null;
             if (redCrosshairUI != null) redCrosshairUI.gameObject.SetActive(false);
         }
     }
 
     private void ScanForEnemies()
     {
-        currentTarget = null;
+        currentTargetCollider = null;
         float closestDistance = float.MaxValue;
         
+        // Tự động đo bán kính thực tế của cái vòng trên màn hình
+        float dynamicRadius = (whiteCircleUI.rect.width / 2f) * whiteCircleUI.lossyScale.x;
         Vector2 scanCenter = RectTransformUtility.WorldToScreenPoint(null, whiteCircleUI.position);
+        
         Collider[] hits = Physics.OverlapSphere(mainCam.transform.position, maxShootDistance, enemyLayer);
 
         foreach (var hit in hits)
         {
-            Vector3 screenPos = mainCam.WorldToScreenPoint(hit.transform.position);
+            // ĐIỂM ĂN TIỀN LÀ ĐÂY: Lấy tâm bụng (bounds.center) thay vì gót chân (transform.position)
+            Vector3 centerPos = hit.bounds.center; 
+            Vector3 screenPos = mainCam.WorldToScreenPoint(centerPos);
             
             if (screenPos.z > 0) 
             {
                 Vector2 enemyScreenPos2D = new Vector2(screenPos.x, screenPos.y);
                 float distanceToCenter = Vector2.Distance(scanCenter, enemyScreenPos2D);
 
-                if (distanceToCenter <= scanRadius && distanceToCenter < closestDistance)
+                // Kiểm tra bằng dynamicRadius
+                if (distanceToCenter <= dynamicRadius && distanceToCenter < closestDistance)
                 {
                     closestDistance = distanceToCenter;
-                    currentTarget = hit.transform;
+                    currentTargetCollider = hit;
                 }
             }
         }
 
-        if (currentTarget != null)
+        if (currentTargetCollider != null)
         {
             redCrosshairUI.gameObject.SetActive(true);
-            Vector3 targetScreenPos = mainCam.WorldToScreenPoint(currentTarget.position);
+            
+            
+            Vector3 targetScreenPos = mainCam.WorldToScreenPoint(currentTargetCollider.bounds.center);
             redCrosshairUI.position = targetScreenPos;
         }
         else
@@ -72,16 +79,19 @@ public class GunScaner : MonoBehaviour
             redCrosshairUI.gameObject.SetActive(false);
         }
     }
-
-    public Transform GetTargetPoint()
+    public Vector3 GetTargetPosition()
     {
-        return currentTarget; 
+        if (currentTargetCollider != null) 
+            return currentTargetCollider.bounds.center;
+            
+        return Vector3.zero;
     }
 
-    public StunReceiver GetTarget() 
+    // trả về IImpact
+    public IDamage GetTarget() 
     {
-        if (currentTarget != null)
-            return currentTarget.GetComponent<StunReceiver>();
+        if (currentTargetCollider != null)
+            return currentTargetCollider.GetComponent<IDamage>();
         return null;
     }
 }

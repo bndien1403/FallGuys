@@ -47,21 +47,36 @@ public class GunController : ItemBase
     private void Fire()
     {
         if (_animator != null) 
-            _animator.SetTrigger(shootAnimTrigger);
+         //   _animator.SetTrigger(shootAnimTrigger);
             
         if (muzzleFlash != null) 
             muzzleFlash.Play();
 
         if (_gunScaner == null) return;
+        IDamage target = _gunScaner.GetTarget();
+        Vector3 targetPos = _gunScaner.GetTargetPosition(); 
         
-        StunReceiver target = _gunScaner.GetTarget();
-        Transform targetPoint = _gunScaner.GetTargetPoint();
-
-        if (target != null && targetPoint != null && gunMuzzle != null)
+        if (target != null)
         {
-            Vector3 hitDirection = (targetPoint.position - gunMuzzle.position).normalized;
-            target.ApplyStun(hitDirection, knockbackForce, stunDuration);
-            Debug.Log($"<color=green>[Gun] Bắn trúng: {target.gameObject.name}</color>");
+            // apply knockback
+            if (targetPos != Vector3.zero && gunMuzzle != null)
+            {
+                Vector3 hitDirection = (targetPos - gunMuzzle.position).normalized;
+                target.TakeKnockback(hitDirection, knockbackForce);
+            }
+
+            // apply stun
+            target.TakeStun(stunDuration);
+            
+            // debug log via mono cast
+            if (target is MonoBehaviour monoTarget)
+            {
+                Debug.Log($"<color=green>[Gun] BỤP! Bắn trúng giữa ngực: {monoTarget.gameObject.name}</color>");
+            }
+        }
+        else
+        {
+            Debug.Log("<color=yellow>[Gun] khong có địch trong tầm ngắm.</color>");
         }
     }
-}
+} 

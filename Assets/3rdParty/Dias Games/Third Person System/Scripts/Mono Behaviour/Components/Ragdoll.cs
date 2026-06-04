@@ -56,7 +56,7 @@ namespace DiasGames.Components
             }
         }
 
-        private void ActivateRagdoll()
+        public void ActivateRagdoll()
         {
             if (_animator == null) return;
 
@@ -70,6 +70,17 @@ namespace DiasGames.Components
 
             // activate colliders
             _ragdollColliders.ForEach(c => c.enabled = true);
+        }
+        public void DeactivateRagdoll()
+        {
+            if (_animator == null) return;
+            _ragdollRigidbodies.ForEach(r => { 
+                r.isKinematic = true;
+                r.useGravity = false;
+            });
+            
+            _ragdollColliders.ForEach(c => c.enabled = false);
+            _animator.enabled = true;
         }
     }
 }

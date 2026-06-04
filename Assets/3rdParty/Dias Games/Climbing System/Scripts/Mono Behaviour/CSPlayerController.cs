@@ -16,7 +16,7 @@ namespace DiasGames.Controller
 
         private const float _threshold = 0.01f;
 
-        [SerializeField] private bool hideCursor = true;
+        [SerializeField] private bool hideCursor = false;
 
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]

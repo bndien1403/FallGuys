@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Gun
   itemType: 0
   itemCategory: 0
-  icon: {fileID: 6385031697862701135, guid: 3d98b1a625122b44185f7f70fdd7f506, type: 3}
+  icon: {fileID: 21300000, guid: f906188a37f2e5148b25c7590c9b5e68, type: 3}
   prefab: {fileID: 1922203563431936800, guid: da29dbb386adcc34380418d7045753df, type: 3}
   parentBoneName: DEF-hand.R
   positionOffset: {x: 0.00047, y: 0.00316, z: 0.0012}

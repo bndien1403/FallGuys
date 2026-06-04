@@ -39,6 +39,16 @@ namespace DiasGames.Components
             OnHealthChanged?.Invoke();
         }
 
+        public void TakeStun(float duration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TakeKnockback(Vector3 direction, float force)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Restore an amount of health points
         /// </summary>
